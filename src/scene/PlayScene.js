@@ -61,6 +61,7 @@ export default class PlayScene extends Phaser.Scene {
     objectA.randomLevel();
     objectA.back();
 
+
     this.dragObject = null;
   }
 
@@ -77,17 +78,17 @@ export default class PlayScene extends Phaser.Scene {
       );
 
       if (isIntersects) {
-        const currentIcon = this.map[current.row][current.col];
+        const nextIcon = this.map[current.row][current.col];
         if (
-          this.dragObject.level !== currentIcon.level ||
+          this.dragObject.level !== nextIcon.level ||
           this.dragObject.level == 3 ||
-          current.level == 3
+          current.level == 3 || (this.dragObject.row == current.row && this.dragObject.col == current.col)
         ) {
           break;
         }
 
         flag = true;
-        this.mergeIcon(this.dragObject, currentIcon);
+        this.mergeIcon(this.dragObject, nextIcon);
         break;
       }
     }
